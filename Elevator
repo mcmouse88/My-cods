@@ -1,0 +1,37 @@
+#include <iostream>
+
+using namespace std;
+
+enum mall {parking = -1, hall, shops, roof};
+
+int main()
+{
+	int floor;
+	bool exit = false;
+	while (!exit) // проверяем равен ли exit значению false
+	{
+		cout << "Enter your floor (from -1 to 2): ";
+		cin >> floor;
+		switch (floor) {
+			case parking: // Через оператор switch проверяем какое значение ввел пользователь
+				cout << "We on the -1 floor in the parking" << endl;
+				break; // обязательно добавляем break иначе switch будет считывать все case
+			case hall:
+				cout << "We on the 0 floor in the hall" << endl;
+				break;
+			case shops:
+				cout << "We on the 1 floor in the shops" << endl;
+				break;
+			case roof:
+				cout << "We on the 2 floor in the roof" << endl;
+				break;
+			default: // Если пользователь ввел другое значение то выводим сообщение об ошибке
+				cout << "You choose a wrong floor" << endl;
+		}
+		cout << "If yoy want to play again press 0 or press 1 to exit this game" << endl;
+		cin >> exit; // выбираем значение bool exit, для выхода из игры или продолжения
+	}
+
+	cin.get();
+	return 0;
+}
