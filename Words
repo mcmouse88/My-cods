@@ -1,0 +1,30 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+vector<string> SplitIntoWords(string text) { // Создаем функцию вектора
+	vector <string> words; // Создаем вектор
+	string word; // Создаем переменную строки
+	for (int i = 0; i < text.size(); ++i) { // Перебираем строку в функции
+		if (text[i] == ' ') { // Если символ строки равен пустой строке, то
+			words.push_back(word); // Добавляем в конец вектора words переменную word
+			word = ""s; // Которая равна символам перед символом пробел
+		}
+		else {
+			word += text[i]; // Иначе к переменной word добавляем символы (если сивол не равен пустой строке)
+		}		
+	}
+	words.push_back(word); // Добавляем к вектору последнее слово в строке, без этой команды оно не считается
+	return words; // Возвращаем вектор words
+}	
+int main() {
+	string query; // Создаем переменную строки
+	getline(cin, query); // Вводим ее и считываем
+	for (string word : SplitIntoWords(query)) { // Перебираем строку используя функцию вектора на слова
+		cout << '[' << word << ']' << endl; // Выводим слова в консоль
+	}
+	cin.get();
+	return 0;
+}
