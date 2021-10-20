@@ -18,12 +18,12 @@ public class Main {
         while (userInput != randomInt) {
             userInput = scanner.nextInt(); // В этой переменной должен сохраняться ввод пользователя
 
-            if (randomInt < userInput) { // Условие проверяется в цикле
+            if (randomInt < userInput) // Условие проверяется в цикле
                 System.out.println("Меньше");
-            } else if (randomInt > userInput)
+            else if (randomInt > userInput)
                 // Второе условие
                 System.out.println("Больше");
-            else
+            else 
                 System.out.println("Верно!");
         }
         // Печатаем, когда число угадано
