@@ -1,0 +1,9 @@
+package com.company; // Пакет который содержит все данные (классы и т.п.)
+
+public class Main {
+
+    public static void main(String[] args) {
+        SimpleGui app = new SimpleGui();
+        app.setVisible(true);
+    }
+}
