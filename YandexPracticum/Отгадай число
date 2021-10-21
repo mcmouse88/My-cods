@@ -1,5 +1,6 @@
 package com.company; // Пакет который содержит все данные (классы и т.п.)
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.Random;
 
@@ -15,17 +16,24 @@ public class Main {
         System.out.println("Ваш ход:");
 
         // Напишите условие цикла для запуска игры
-        while (userInput != randomInt) {
-            userInput = scanner.nextInt(); // В этой переменной должен сохраняться ввод пользователя
-
-            if (randomInt < userInput) // Условие проверяется в цикле
+        do {
+            try {
+                userInput = scanner.nextInt();
+            } catch (NoSuchElementException e) {
+                System.out.println("Вы ввели не число, пожалуйста введите число!");
+                scanner.nextLine();
+                continue;
+            }
+            if (randomInt < userInput && userInput < 1000 && userInput >= 0)
                 System.out.println("Меньше");
-            else if (randomInt > userInput)
-                // Второе условие
+            else if (randomInt > userInput && userInput < 1000 && userInput >= 0)
                 System.out.println("Больше");
-            else 
+            else if (userInput > 1000 | userInput < 0)
+                System.out.println("Вы ввели неверное число, введите число в диапазоне от 0 до 1000");
+            else
                 System.out.println("Верно!");
-        }
+            scanner.nextLine();
+        } while (userInput != randomInt);
         // Печатаем, когда число угадано
         System.out.println("Вы великолепны! Именно это я загадал.");
     }
