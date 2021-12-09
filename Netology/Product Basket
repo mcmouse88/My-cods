@@ -7,17 +7,17 @@ class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String[] products = {"Хлеб", "Молоко", "Курица", "Сыр", "Колбаса", "Яйца"};
-        int[] prices = {50, 60, 200, 250, 150, 80};
+        int[] prices = {50, 60, 200, 250, 150, 8};
         System.out.println("Список возможных товаров для покупки: ");
         for (int i = 0; i < products.length; i++) {
             System.out.println((i + 1) + ". " + products[i] + " " + prices[i] + " руб/шт");
         }
+        int productNumber = 0;
+        int productCount = 0;
+        int currentPrice = 0;
         int[] amount = {0, 0, 0, 0, 0, 0};
         int[] totalPrices = {0, 0, 0, 0, 0, 0};
         while (true) {
-            int productNumber = 0;
-            int productCount = 0;
-            int currentPrice = prices[productNumber];
             System.out.println("Введите товар и его количество или введите \"end\"");
             try {
                 String input = scanner.nextLine();
@@ -26,22 +26,26 @@ class Main {
                 String[] enterNumber = input.split("\\s");
                 productNumber = Integer.parseInt(enterNumber[0]) - 1;
                 productCount = Integer.parseInt(enterNumber[1]);
-                amount[productNumber] = productCount;
-                totalPrices[productNumber] = productCount * currentPrice;
+                currentPrice = prices[productNumber];
+                amount[productNumber] += productCount;
+                totalPrices[productNumber] = amount[productNumber] * currentPrice;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Вы ввели информацию в неверном формате");
                 continue;
             }
         }
-        System.out.println("Ваша корзина:");
-        System.out.printf("%1$-12s%2$13s%3$15s%4$18s%n", "Наименование товара", "Количество", "Цена/за ед.", "Общая стоимость");
+        System.out.println("Ваши покупки:");
+        System.out.println("_________________________________________________________________________");
+        System.out.printf("%-20s  |  %7s  |  %7s  |  %7s |%n", "Наименование товара", "Количество", "Цена/за ед.", "Общая стоимость");
+        System.out.println("-------------------------------------------------------------------------");
         for (int i = 0; i < amount.length; i++) {
             if (amount[i] != 0)
-                System.out.printf("%1$-5s%2$18d%3$10d%4$10d%n", products[i], amount[i], prices[i], totalPrices[i]);
+                System.out.printf("%-20s  |  %10s  |  %11s  |  %15s |%n", products[i], amount[i], prices[i], totalPrices[i]);
         }
+        System.out.println("-------------------------------------------------------------------------");
         int total = 0;
         for (int i = 0; i < totalPrices.length; i++)
             total += totalPrices[i];
-        System.out.printf("%57s", "Итого " + total);
+        System.out.printf("%71s", "Итого " + total + " рублей");
     }
 }
